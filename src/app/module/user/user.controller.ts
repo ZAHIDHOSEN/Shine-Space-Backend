@@ -20,6 +20,42 @@ const createUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)
     
 
 })
+const updateUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
+
+  const userData = req.body
+  const id = req.params.id as string
+  
+  const user = await UserServices.updateUser(userData,id)
+
+
+  sendResponse(res,{
+        success: true,
+        statusCode: httpStatus.CREATED,
+        message: "userUpdated Successfully",
+        data: user,
+  })
+    
+
+})
+
+
+const getAllUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
+
+
+  
+  const users = await UserServices.getAllUsers()
+
+
+  sendResponse(res,{
+        success: true,
+        statusCode: httpStatus.CREATED,
+        message: "getAllUsers get Successfully",
+        data: users,
+  })
+    
+
+})
+
 
 
 
@@ -30,5 +66,7 @@ const createUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)
 
 
 export const UserController  ={
-  createUsers
+  createUsers,
+  updateUsers,
+  getAllUsers
 }

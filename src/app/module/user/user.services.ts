@@ -27,8 +27,37 @@ const createUser = async(userData:Partial<IUser>) =>{
 
 
 
+const updateUser = async(userData:Partial<IUser>,id:string)=>{
+
+
+
+    
+
+
+}
+
+
+
+
+const getAllUsers = async()=>{
+   const users = await User.find({})
+   const totalUsers = await User.countDocuments()
+
+   return {
+    data: users,
+    meta:{
+        total:totalUsers
+    }
+   }
+}
+
+
+
+
 
 
 export const UserServices = {
-    createUser
+    createUser,
+    updateUser,
+    getAllUsers
 } 
