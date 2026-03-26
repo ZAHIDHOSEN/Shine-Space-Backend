@@ -19,6 +19,7 @@ export interface IUser {
     phone ?: string
     picture ?: string
     status ?: Status
+    
    
 
 }
