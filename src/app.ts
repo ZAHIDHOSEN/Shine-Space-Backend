@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express"
 import cors from "cors"
 import { UserRoutes } from "./app/module/user/user.route"
+import { AuthRoute } from "./app/module/auth/auth.route"
 
 
 
@@ -16,6 +17,7 @@ app.use(cors({
 
 
 app.use("/api/v1/user",UserRoutes)
+app.use("/api/v1/auth",AuthRoute)
 
 
 app.get("/",(req:Request,res:Response)=>{

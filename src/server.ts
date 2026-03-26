@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 import {Server} from "http"
 import app from "./app"
 import dotenv from "dotenv"
+import { seedAdmin } from "./app/utils/seedAdmin"
 
 
 dotenv.config()
@@ -17,7 +18,9 @@ const startServer = async()=>{
 
         server = app.listen((process.env.PORT),()=>{
             console.log(`server is listening to port:${process.env.PORT}`)
+            
         })
+        await seedAdmin()
 
         
     } catch (error) {
