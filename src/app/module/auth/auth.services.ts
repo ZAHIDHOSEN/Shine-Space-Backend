@@ -2,7 +2,7 @@ import { createToken } from "../../utils/jwt"
 import { IUser } from "../user/user.interface"
 import { User } from "../user/user.model"
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+
 
 
 const loginUser = async(payload:Partial<IUser>)=>{

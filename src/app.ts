@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 import cors from "cors"
 import { UserRoutes } from "./app/module/user/user.route"
 import { AuthRoute } from "./app/module/auth/auth.route"
+import cookieParser from "cookie-parser"
 
 
 
@@ -10,6 +11,7 @@ import { AuthRoute } from "./app/module/auth/auth.route"
 
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 app.use(cors({
     origin:'http://localhost:3000',
     credentials:true
