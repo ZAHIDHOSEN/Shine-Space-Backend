@@ -23,6 +23,42 @@ const createProperty = async(payload:Partial<IProperty>,user:any)=>{
 
 
 
+const updateProperty = async(payload:Partial<IProperty>,id:string)=>{
+
+   const isPropertyExits = await Property.findById(id)
+   
+   if(!isPropertyExits){
+      return 
+   }
+   
+   const result = await Property.findByIdAndUpdate(id,payload,{
+      new:true,
+      runValidators:true
+     
+   })
+    
+   return result
+}
+
+
+
+
+const deleteProperty = async(id:string)=>{
+
+   const isPropertyExits = await Property.findById(id)
+   
+   if(!isPropertyExits){
+      return 
+   }
+
+   const result = await Property.findByIdAndDelete(id)
+
+   return result
+}
+
+
+
+
 
 
 
@@ -37,5 +73,8 @@ const createProperty = async(payload:Partial<IProperty>,user:any)=>{
 
 
 export const PropertyServices = {
-   createProperty
+   createProperty,
+   updateProperty,
+   deleteProperty
+
 }

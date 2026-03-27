@@ -29,7 +29,11 @@ const createUser = async(userData:Partial<IUser>) =>{
 
 const updateUser = async(userData:Partial<IUser>,id:string)=>{
 
+const user = await User.findByIdAndUpdate(id,userData,{
+    new:true
+})
 
+return user
 
     
 

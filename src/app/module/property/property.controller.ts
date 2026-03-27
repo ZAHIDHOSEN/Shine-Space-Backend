@@ -22,6 +22,42 @@ const createProperty = catchAsync(async(req:Request,res:Response,next:NextFuncti
 })
 
 
+const updateProperty = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
+    const id = req.params.id as string
+    const payload = req.body
+    const property = await PropertyServices.updateProperty(payload,id)
+
+
+
+  sendResponse(res,{
+        success: true,
+        statusCode: httpStatus.CONTINUE,
+        message: "property updated Successfully",
+        data: property,
+  })
+    
+
+})
+
+
+const deleteProperty = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
+    const id = req.params.id as string
+   
+    const property = await PropertyServices.deleteProperty(id)
+
+
+
+  sendResponse(res,{
+        success: true,
+        statusCode: httpStatus.CONTINUE,
+        message: "property deleted Successfully",
+        data: null,
+  })
+    
+
+})
+
+
 
 
 
@@ -33,5 +69,7 @@ const createProperty = catchAsync(async(req:Request,res:Response,next:NextFuncti
 
 
 export const PropertyController = {
-   createProperty
+   createProperty,
+   updateProperty,
+   deleteProperty
 }
