@@ -58,6 +58,22 @@ const getAllUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)
 })
 
 
+const getMe = catchAsync(async (req, res) => {
+  const userId = req.user._id;
+
+  const user = await UserServices.getMe(userId)
+
+  // const user = await User.findById(userId).select("-password");
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User fetched successfully",
+    data: user,
+  });
+});
+
+
 
 
 
@@ -69,5 +85,6 @@ const getAllUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)
 export const UserController  ={
   createUsers,
   updateUsers,
-  getAllUsers
+  getAllUsers,
+  getMe
 }

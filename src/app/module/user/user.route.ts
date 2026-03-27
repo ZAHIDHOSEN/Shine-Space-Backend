@@ -8,8 +8,9 @@ import { Role } from "./user.interface"
 const router = express.Router()
 
 router.post("/",UserController.createUsers)
-router.patch("/:id",UserController.updateUsers)
+router.patch("/:id",checkAuth(),UserController.updateUsers)
 router.get("/",checkAuth(Role.ADMIN),UserController.getAllUsers)
+router.get("/me",checkAuth(),UserController.getMe)
 
 
 export const UserRoutes = router
