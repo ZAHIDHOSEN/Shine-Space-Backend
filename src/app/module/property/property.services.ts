@@ -11,7 +11,7 @@ const createProperty = async(payload:Partial<IProperty>,user:any)=>{
        price:payload.price,
        location:payload.location,
        images:payload.images,
-       agentId:user.id
+       agentId:user._id
        
        
 

@@ -24,6 +24,7 @@ const updateUsers = catchAsync(async(req:Request,res:Response,next:NextFunction)
 
   const userData = req.body
   const id = req.params.id as string
+  // const id = req.user 
   
   const user = await UserServices.updateUser(userData,id)
 
