@@ -12,5 +12,9 @@ router.patch("/:id",checkAuth(),UserController.updateUsers)
 router.get("/",checkAuth(Role.ADMIN),UserController.getAllUsers)
 router.get("/me",checkAuth(),UserController.getMe)
 
+router.patch("/create-agent/:id",checkAuth(Role.ADMIN),UserController.promoteToAgent)
+
+
+
 
 export const UserRoutes = router

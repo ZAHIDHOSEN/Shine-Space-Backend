@@ -4,6 +4,7 @@ import { UserRoutes } from "./app/module/user/user.route"
 import { AuthRoute } from "./app/module/auth/auth.route"
 import cookieParser from "cookie-parser"
 import { PropertyRoute } from "./app/module/property/property.route"
+import { StatsRoute } from "./app/module/stats/stats.route"
 
 
 
@@ -22,6 +23,7 @@ app.use(cors({
 app.use("/api/v1/user",UserRoutes)
 app.use("/api/v1/auth",AuthRoute)
 app.use("/api/v1/property",PropertyRoute)
+app.use("/api/v1/stats",StatsRoute)
 
 
 app.get("/",(req:Request,res:Response)=>{

@@ -57,7 +57,33 @@ const deleteProperty = async(id:string)=>{
 }
 
 
+const getAllProperties = async (query: any) => {
+  const filter: any = {};
 
+  // 🌆 city filter
+  if (query.city) {
+    filter["location.city"] = query.city;
+  }
+
+  // 🏷️ type filter
+  if (query.propertyType) {
+    filter.propertyType = query.propertyType;
+  }
+
+  // 💰 price filter
+  if (query.minPrice || query.maxPrice) {
+    filter.price = {};
+    if (query.minPrice) filter.price.$gte = Number(query.minPrice);
+    if (query.maxPrice) filter.price.$lte = Number(query.maxPrice);
+  }
+
+  const properties = await Property.find(filter).populate(
+    "agentId",
+    "name email role"
+  );
+
+  return properties;
+};
 
 
 
@@ -75,6 +101,7 @@ const deleteProperty = async(id:string)=>{
 export const PropertyServices = {
    createProperty,
    updateProperty,
-   deleteProperty
+   deleteProperty,
+   getAllProperties
 
 }

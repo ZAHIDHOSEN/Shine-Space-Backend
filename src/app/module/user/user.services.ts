@@ -30,7 +30,9 @@ const createUser = async(userData:Partial<IUser>) =>{
 const updateUser = async(userData:Partial<IUser>,id:string)=>{
 
 const user = await User.findByIdAndUpdate(id,userData,{
-    new:true
+    new:true,
+    runValidators:true
+
 })
 
 return user
@@ -65,6 +67,20 @@ const getMe = async(id:string)=>{
 }
 
 
+// user to agents
+
+const promoteToAgent = async (id: string) => {
+  const user = await User.findByIdAndUpdate(
+    id,
+    { role: "AGENT" },
+    { new: true, runValidators:true },
+    
+  ).select("-password");
+
+  return user;
+};
+
+
 
 
 
@@ -73,5 +89,6 @@ export const UserServices = {
     createUser,
     updateUser,
     getAllUsers,
-    getMe
+    getMe,
+    promoteToAgent
 } 

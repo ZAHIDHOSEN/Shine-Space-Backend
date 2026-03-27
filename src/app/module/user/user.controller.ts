@@ -74,6 +74,23 @@ const getMe = catchAsync(async (req, res) => {
 });
 
 
+const promoteToAgent = catchAsync(async (req, res) => {
+
+  const id = req.params.id as string
+
+  const agent = await UserServices.promoteToAgent(id)
+
+  // const user = await User.findById(userId).select("-password");
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User promoted to agents",
+    data: agent,
+  });
+});
+
+
 
 
 
@@ -86,5 +103,6 @@ export const UserController  ={
   createUsers,
   updateUsers,
   getAllUsers,
-  getMe
+  getMe,
+  promoteToAgent
 }

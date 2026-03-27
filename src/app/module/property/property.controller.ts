@@ -58,6 +58,18 @@ const deleteProperty = catchAsync(async(req:Request,res:Response,next:NextFuncti
 })
 
 
+const getAllProperties = catchAsync(async (req, res) => {
+  const data = await PropertyServices.getAllProperties(req.query);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Properties fetched successfully",
+    data,
+  });
+});
+
+
 
 
 
@@ -71,5 +83,6 @@ const deleteProperty = catchAsync(async(req:Request,res:Response,next:NextFuncti
 export const PropertyController = {
    createProperty,
    updateProperty,
-   deleteProperty
+   deleteProperty,
+   getAllProperties
 }
