@@ -8,7 +8,7 @@ const createProperty = catchAsync(async(req:Request,res:Response,next:NextFuncti
     const user = req.user
     const payload = req.body
     const property = await PropertyServices.createProperty(payload,user)
-
+   
 
 
   sendResponse(res,{
@@ -58,7 +58,7 @@ const deleteProperty = catchAsync(async(req:Request,res:Response,next:NextFuncti
 })
 
 
-const getAllProperties = catchAsync(async (req, res) => {
+const getAllProperties = catchAsync(async (req:Request,res:Response,next:NextFunction) => {
   const data = await PropertyServices.getAllProperties(req.query);
 
   sendResponse(res, {
@@ -68,6 +68,26 @@ const getAllProperties = catchAsync(async (req, res) => {
     data,
   });
 });
+
+
+
+
+const getSingleProperty = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
+    const id = req.params.id as string
+   
+    const property = await PropertyServices.getSingleProperty(id)
+
+
+
+  sendResponse(res,{
+        success: true,
+        statusCode: httpStatus.CONTINUE,
+        message: "single property fetch Successfully",
+        data: property,
+  })
+    
+
+})
 
 
 
@@ -84,5 +104,6 @@ export const PropertyController = {
    createProperty,
    updateProperty,
    deleteProperty,
-   getAllProperties
+   getAllProperties,
+   getSingleProperty
 }

@@ -10,9 +10,10 @@ const router = Router()
 
 
 
-router.post("/",checkAuth(Role.ADMIN || Role.AGENT),PropertyController.createProperty)
-router.patch("/:id",checkAuth(Role.ADMIN || Role.AGENT),PropertyController.updateProperty)
-router.delete("/:id",checkAuth(Role.ADMIN || Role.AGENT),PropertyController.deleteProperty)
+router.post("/",checkAuth(Role.ADMIN, Role.AGENT),PropertyController.createProperty)
+router.patch("/:id",checkAuth(Role.ADMIN, Role.AGENT),PropertyController.updateProperty)
+router.delete("/:id",checkAuth(Role.ADMIN, Role.AGENT),PropertyController.deleteProperty)
+router.get("/:id",checkAuth(),PropertyController.getSingleProperty)
 router.get("/",PropertyController.getAllProperties)
 
 

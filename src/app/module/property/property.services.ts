@@ -87,6 +87,14 @@ const getAllProperties = async (query: any) => {
 
 
 
+const getSingleProperty = async(id:string)=>{
+   const property = await Property.findById(id)
+
+   return property
+}
+
+
+
 
 
 
@@ -102,6 +110,7 @@ export const PropertyServices = {
    createProperty,
    updateProperty,
    deleteProperty,
-   getAllProperties
+   getAllProperties,
+   getSingleProperty
 
 }
