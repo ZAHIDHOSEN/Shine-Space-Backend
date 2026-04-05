@@ -81,7 +81,7 @@ const getSingleProperty = catchAsync(async(req:Request,res:Response,next:NextFun
 
   sendResponse(res,{
         success: true,
-        statusCode: httpStatus.CONTINUE,
+        statusCode: 200,
         message: "single property fetch Successfully",
         data: property,
   })

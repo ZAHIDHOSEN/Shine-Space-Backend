@@ -88,7 +88,7 @@ const getAllProperties = async (query: any) => {
 
 
 const getSingleProperty = async(id:string)=>{
-   const property = await Property.findById(id)
+   const property = await Property.findById(id).populate("agentId","name email role")
 
    return property
 }

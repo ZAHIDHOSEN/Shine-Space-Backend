@@ -12,23 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const app_1 = __importDefault(require("./app"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const seedAdmin_1 = require("./app/utils/seedAdmin");
-dotenv_1.default.config();
-let server;
-const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield mongoose_1.default.connect(process.env.DB_URL);
-        console.log("connect to db");
-        server = app_1.default.listen((process.env.PORT), () => {
-            console.log(`server is listening to port:${process.env.PORT}`);
-        });
-        yield (0, seedAdmin_1.seedAdmin)();
-    }
-    catch (error) {
-        console.log(error, "mongodb connection failed");
-    }
-});
-startServer();
+exports.StatsController = void 0;
+const catchAsync_1 = require("../../utils/catchAsync");
+const sendResponse_1 = require("../../utils/sendResponse");
+const stats_services_1 = require("./stats.services");
+const http_status_codes_1 = __importDefault(require("http-status-codes"));
+const getAllStats = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield stats_services_1.StatsServices.getAllStats();
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: "stats data fetch successfully",
+        data: result
+    });
+}));
+exports.StatsController = {
+    getAllStats
+};

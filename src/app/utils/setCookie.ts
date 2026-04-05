@@ -6,21 +6,23 @@ export interface AuthToken {
      refreshToken ?: string
 }
 
+ const isProduction = process.env.NODE_ENV === "production"
 
 export const setAuthCookie = (res:Response,tokenInfo:AuthToken)=>{
     if(tokenInfo.accessToken){
         res.cookie("accessToken",tokenInfo.accessToken,{
          httpOnly:true,
-         secure: false, //process.env.NODE_ENV === "production",
-         sameSite:"lax"
+         secure: isProduction, //process.env.NODE_ENV === "production",
+         sameSite:(isProduction ? "none" : "lax") as "none" | "lax",
         })
     }
 
     if(tokenInfo.refreshToken){
         res.cookie("refreshToken",tokenInfo.refreshToken,{
             httpOnly:true,
-            secure:false,
-            sameSite:"lax"
+            secure:isProduction,
+            sameSite:(isProduction ? "none" : "lax") as "none" | "lax",
+            
         })
     }
 }

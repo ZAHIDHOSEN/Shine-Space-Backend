@@ -5,6 +5,10 @@ import httpStatus from "http-status-codes"
 import { AuthServices } from "./auth.services";
 import { setAuthCookie } from "../../utils/setCookie";
 
+
+ const isProduction = process.env.NODE_ENV === "production"
+
+    
 const loginUser = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
        const payload = req.body
        const loginInfo = await AuthServices.loginUser(payload)
@@ -25,13 +29,14 @@ const logOutUser =  catchAsync(async(req:Request,res:Response,next:NextFunction)
       
     res.clearCookie("accessToken",{
     httpOnly:true,
-    secure: false,
-    sameSite:"lax"
+    secure: isProduction,
+    sameSite: (isProduction ? "none" : "lax") as "none" | "lax",
+
    })
    res.clearCookie("refreshToken",{
     httpOnly:true,
-    secure: false,
-    sameSite:"lax"
+    secure: isProduction,
+    sameSite: (isProduction ? "none" : "lax") as "none" | "lax",
    })
      
 
